@@ -5,6 +5,7 @@
       <option name="ignoredIdentifiers">
         <list>
           <option value="main.bpFlag" />
+          <option value="random.random.randint" />
         </list>
       </option>
     </inspection_tool>
