@@ -1,0 +1,23 @@
+version: '3.5'
+
+services:
+  postgres:
+    image: postgres:15
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_DB=python_coursework
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+    volumes:
+      - './db_init:/docker-entrypoint-initdb.d/'
+
+  flask:
+    #restart: always
+    build: ./flask_server/
+    ports:
+      - "5000:80"
+    volumes:
+      - ./flask_server:/usr/src/app
+    depends_on:
+      - "postgres"
