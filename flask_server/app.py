@@ -1,4 +1,6 @@
+import hashlib
 import sys
+import uuid
 
 import flask
 from flask import Flask, render_template, redirect, request, session
@@ -6,7 +8,7 @@ from flask import Flask, render_template, redirect, request, session
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 from conf.config import Config
-from models.model_User import User
+from models.User import User
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 #from sqlalchemy.orm import session, sessionmaker
 
@@ -59,7 +61,6 @@ def indexpage():
 
 @app.route("/auth", methods=['GET', 'POST'])
 def auth():
-    #user = None  # из-за этого говна может не загружаться страница АУФ
     if request.method == 'POST':
         login = request.form['login']
         password = request.form['password']
@@ -71,18 +72,14 @@ def auth():
             user = con.execute(stmt, {'login': login, 'password': password}).fetchone()
             if user:
                 for row in user:
-                    #user_uuid = str(row[7:-4])
                     user_uuid = str(row)
                     session['active_user_uuid'] = user_uuid
-                    #print(user_uuid, file=sys.stderr)
                     userlogin = User().create(user_uuid)
-                    #print(userlogin.get_id(), file=sys.stderr) #- важная строчка!!!!!!!!!!!!!!
                     login_user(userlogin)
-                    #print(session['active_user_uuid'], file=sys.stderr)
-                    #next = flask.request.args.get('next')
                     return redirect("/profile")
+    if 'active_user_uuid' in session:
+        return redirect("/profile")
     return render_template('auth.html')
-    #return render_template('auth.html', user=user)
 
 
 @app.route("/logout", methods=['GET'])
@@ -96,18 +93,26 @@ def logout():
 @app.route("/reg", methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
+        name = request.form['name']
         login = request.form['login']
         password = request.form['password']
         password2 = request.form['password2']
-
+        if name and login and password:
+            if password2 == password:
+                #con = get_sql_connect()
+                #stmt = text("insert into public.user (role_id, login, password, name) values (2, :login, md5(:password), :name)")
+                #con.execute(stmt, {'login': login, 'password': password, 'name': name})
+                password = hashlib.md5(password.encode())
+                user = User(user_uuid=uuid.uuid4(), role_id=2, login=login, password=password.hexdigest(), name=name)
+                db.session.add(user)
+                db.session.commit()
+                return redirect("/auth")
     return render_template('register.html')
 
 
 @app.route("/profile")
 @login_required
 def profile():
-    #user = current_user()
-    #user = user.get_id()
     if 'active_user_uuid' in session:
         active_user_uuid = session['active_user_uuid']
         #print(active_user_uuid, file=sys.stderr)

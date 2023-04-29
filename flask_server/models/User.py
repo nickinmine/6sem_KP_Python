@@ -1,23 +1,16 @@
-import json
-import sys
-from random import random, randint
-
 from flask_sqlalchemy import SQLAlchemy
-from flask_sqlalchemy.model import Model
 from sqlalchemy import Column, String, Integer
-from sqlalchemy.ext.declarative import DeclarativeMeta
 
 db = SQLAlchemy()
 
 
 class User(db.Model):
     __tablename__ = 'user'
-    user_uuid = Column(String(), nullable=False, primary_key=True)
+    user_uuid = Column(String(), nullable=True, primary_key=True)
     role_id = Column(Integer(), nullable=False)
     login = Column(String(), unique=True, nullable=False)
-    #password = Column(String(), nullable=False)
+    password = Column(String(), nullable=False)
     name = Column(String(), nullable=False)
-    #avatar = Column(String())
 
     def __repr__(self):
         return f"{self.user_uuid}, {self.role_id}, {self.login}, {self.name}"

@@ -10,18 +10,15 @@
         <p class="form-name">Авторизация</p>
         <label>Логин</label>
         <label>
-            <input type="text" name="login" placeholder="Введите логин">
+            <input type="text" name="login" placeholder="Введите логин" required>
         </label>
         <label>Пароль</label>
         <label>
             <input type="password" name="password" placeholder="Введите пароль" required>
         </label>
         <label><a href="" title="Это исключительно Ваши проблемы)">Забыли пароль?</a></label>
-        <label class="message"></label>
+        <label><a href="/reg" title="Зарегистрироваться">Ещё нет аккаунта?</a></label>
         <button type="submit" title="Вход в систему">Войти</button>
     </form>
-    <!--{% for user1 in user %}
-        {{ user1.user_uuid }}
-    {% endfor %}-->
 </body>
 </html>
