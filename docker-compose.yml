@@ -3,8 +3,6 @@ version: '3.5'
 services:
   postgres:
     image: postgres:15
-    ports:
-      - '5432:5432'
     environment:
       - POSTGRES_DB=python_coursework
       - POSTGRES_USER=postgres

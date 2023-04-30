@@ -39,23 +39,6 @@ SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
-CREATE TABLE public.image (
-    image_id smallint NOT NULL,
-    post_id smallint NOT NULL,
-    image character varying
-);
-
-ALTER TABLE public.image OWNER TO postgres;
-
-ALTER TABLE public.image ALTER COLUMN image_id ADD GENERATED ALWAYS AS IDENTITY (
-    SEQUENCE NAME public.image_image_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
-);
-
 CREATE TABLE public.post (
     post_id integer NOT NULL,
     author_uuid uuid NOT NULL,
@@ -141,16 +124,11 @@ INSERT INTO public."user" VALUES ('39ceeec0-17f6-4872-8339-135b35df4aaf', 4, 'ad
 INSERT INTO public."user" VALUES ('d9ce0ae6-90b5-4a67-8cb1-57c96ce223b7', 2, 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 'Пользователь', NULL);
 INSERT INTO public."user" VALUES ('3621dda6-2a56-41c9-9966-adc8bac23b0e', 3, 'moderator', '0408f3c997f309c03b08bf3a4bc7b730', 'Модератор', NULL);
 
-SELECT pg_catalog.setval('public.image_image_id_seq', 1, false);
-
 SELECT pg_catalog.setval('public.post_post_id_seq', 6, true);
 
 SELECT pg_catalog.setval('public.role_role_id_seq', 4, true);
 
 SELECT pg_catalog.setval('public.theme_thread_theme_id_seq', 2, true);
-
-ALTER TABLE ONLY public.image
-    ADD CONSTRAINT image_pk PRIMARY KEY (image_id);
 
 ALTER TABLE ONLY public.post
     ADD CONSTRAINT post_pk PRIMARY KEY (post_id);
@@ -172,9 +150,6 @@ CREATE TRIGGER auto_theme_close_date BEFORE UPDATE ON public.theme_thread FOR EA
 CREATE TRIGGER thread_checker_insert BEFORE INSERT ON public.post FOR EACH ROW EXECUTE FUNCTION public.thread_is_opened_checker();
 
 CREATE TRIGGER thread_checker_update BEFORE UPDATE ON public.post FOR EACH ROW EXECUTE FUNCTION public.thread_is_opened_checker();
-
-ALTER TABLE ONLY public.image
-    ADD CONSTRAINT image_fk FOREIGN KEY (post_id) REFERENCES public.post(post_id);
 
 ALTER TABLE ONLY public.post
     ADD CONSTRAINT post_fk_1 FOREIGN KEY (theme_id) REFERENCES public.theme_thread(theme_id) ON DELETE CASCADE;

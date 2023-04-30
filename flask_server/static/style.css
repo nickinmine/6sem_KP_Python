@@ -168,6 +168,20 @@ body {
     height: auto;
 }
 
+.forms-collection {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.forms-element {
+    text-align: center;
+}
+
+.info > p {
+    margin: 0;
+}
+
 @media (min-width: 769px) {
     .air-left, .air-right {
         margin-left: 25%;

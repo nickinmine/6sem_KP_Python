@@ -110,13 +110,29 @@ def register():
     return render_template('register.html')
 
 
-@app.route("/profile")
+@app.route("/profile", methods=['GET'])
 @login_required
 def profile():
     if 'active_user_uuid' in session:
-        active_user_uuid = session['active_user_uuid']
-        #print(active_user_uuid, file=sys.stderr)
+        user_uuid = session['active_user_uuid']
+        con = get_sql_connect()
+        stmt = text('select name, login, role_name from public."user" join role r on r.role_id = '
+                    '"user".role_id where user_uuid=:user_uuid')
+        user = con.execute(stmt, {'user_uuid': user_uuid}).fetchone()
+        return render_template('profile.html', user=user)
     return render_template('profile.html')
+
+
+@app.route("/profile/name", methods=['POST'])
+@login_required
+def change_name():
+    return redirect('/profile')
+
+
+@app.route("/profile/password", methods=['POST'])
+@login_required
+def change_password():
+    return redirect('/profile')
 
 
 #@login_manager.unauthorized_handler
