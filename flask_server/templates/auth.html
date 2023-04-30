@@ -1,24 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auth</title>
+    <link rel="stylesheet" href="../static/auth.css">
 </head>
 <body>
-    <form method="post">
-        <p class="form-name">Авторизация</p>
-        <label>Логин</label>
-        <label>
-            <input type="text" name="login" placeholder="Введите логин" required>
-        </label>
-        <label>Пароль</label>
-        <label>
-            <input type="password" name="password" placeholder="Введите пароль" required>
-        </label>
-        <label><a href="" title="Это исключительно Ваши проблемы)">Забыли пароль?</a></label>
-        <label><a href="/reg" title="Зарегистрироваться">Ещё нет аккаунта?</a></label>
-        <button type="submit" title="Вход в систему">Войти</button>
-    </form>
+<div class="app-router-container">
+    <div class="auth-form">
+        <form method="post">
+            <p class="form-name">Авторизация</p>
+            <label>Логин</label>
+            <label>
+                <input type="text" name="login" placeholder="Введите логин" required>
+            </label>
+            <label>Пароль</label>
+            <label>
+                <input type="password" name="password" placeholder="Введите пароль" required>
+            </label>
+            <label><a href="/reg" title="Зарегистрироваться">Ещё нет аккаунта?</a></label>
+            <button type="submit" title="Вход в систему">Войти</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>

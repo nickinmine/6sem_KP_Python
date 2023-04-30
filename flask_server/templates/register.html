@@ -1,32 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Регистрация</title>
+    <link rel="stylesheet" href="../static/reg.css">
 </head>
 <body>
-    <form method="post">
-        <p class="form-name">Регистрация</p>
-        <label>Укажите Ваше имя</label>
-        <label>
-            <input type="text" name="name" placeholder="Введите имя" required>
-        </label>
-        <label>Придумайте уникальный логин</label>
-        <label>
-            <input type="text" name="login" placeholder="Введите логин" required>
-        </label>
-        <label>Придумайте пароль</label>
-        <label>
-            <input type="password" name="password" placeholder="Введите пароль" required>
-        </label>
-        <label>Повторите пароль</label>
-        <label>
-            <input type="password" name="password2" placeholder="Повторите пароль" required>
-        </label>
-        <label>
-            <button type="submit" title="Отправить форму">Зарегистрироваться</button>
-        </label>
-    </form>
+<div class="app-router-container">
+    <div class="auth-form">
+        <form method="post">
+            <p class="form-name">Регистрация</p>
+            <label>Укажите Ваше имя</label>
+            <label>
+                <input type="text" name="name" placeholder="Введите имя" required>
+            </label>
+            <label>Придумайте логин</label>
+            <label>
+                <input type="text" name="login" placeholder="Введите логин" required>
+            </label>
+            <label>Придумайте пароль</label>
+            <label>
+                <input type="password" name="password" placeholder="Введите пароль" required>
+            </label>
+            <label>Повторите пароль</label>
+            <label>
+                <input type="password" name="password2" placeholder="Повторите пароль" required>
+            </label>
+                <button type="submit" title="Отправить форму">Зарегистрироваться</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>

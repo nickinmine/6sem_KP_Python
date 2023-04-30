@@ -4,14 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f695468-b293-4581-ae04-0ea7b821fcb2" name="Changes" comment="init">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+    <list default="true" id="7f695468-b293-4581-ae04-0ea7b821fcb2" name="Changes" comment="reg added">
+      <change afterPath="$PROJECT_DIR$/flask_server/static/auth.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flask_server/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flask_server/models/UserLogin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flask_server/models/model_User.py" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/models/User.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_server/static/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/static/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flask_server/templates/auth.html" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/templates/auth.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_server/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_server/templates/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/templates/profile.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flask_server/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/templates/register.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -22,9 +21,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
         <option value="Python Script" />
         <option value="HTML File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -128,7 +127,8 @@
       <workItem from="1682656814914" duration="612000" />
       <workItem from="1682684396691" duration="5324000" />
       <workItem from="1682699435507" duration="13636000" />
-      <workItem from="1682765586077" duration="658000" />
+      <workItem from="1682765586077" duration="790000" />
+      <workItem from="1682876141461" duration="2058000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1682698199832</created>
@@ -144,7 +144,21 @@
       <option name="project" value="LOCAL" />
       <updated>1682699556036</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="reg added">
+      <created>1682766273743</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1682766273743</updated>
+    </task>
+    <task id="LOCAL-00004" summary="reg added">
+      <created>1682766280302</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1682766280302</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -163,7 +177,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
-    <option name="LAST_COMMIT_MESSAGE" value="init" />
+    <MESSAGE value="reg added" />
+    <option name="LAST_COMMIT_MESSAGE" value="reg added" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/coursework$model_User.coverage" NAME="model_User Coverage Results" MODIFIED="1681846608996" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/flask_server/models" />
