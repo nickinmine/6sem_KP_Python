@@ -3,10 +3,10 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Форум - Главная</title>
+    <title>Список форумов</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../static/images/logo.svg" type="image/png">
-    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/threads.css">
 </head>
 
 <body>
@@ -16,8 +16,8 @@
                 <div class="header-menu">
                     <a href="/thread" class="header-logo" title="К списку форумов">К форумам</a>
                 </div>
-                <span class="header-span-text">Главная</span>
-                <a href="/auth" class="header-auth" title="Вход в систему">
+                <span class="header-span-text">Список форумов</span>
+                <a href="/logout" class="header-auth" title="Выход из системы">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="19" height="17">
                         <path d="M184 83.5l164.5 164c4.7 4.7 4.7 12.3 0 17L184 428.5c-4.7
                             4.7-12.3 4.7-17 0l-7.1-7.1c-4.7-4.7-4.7-12.3 0-17l132-131.4H12c-6.6
@@ -26,36 +26,37 @@
                             0-12 5.4-12 12v8c0 6.6 5.4 12 12 12h132c8.8 0 16 7.2 16 16v288c0 8.8-7.2 16-16
                             16H332c-6.6 0-12 5.4-12 12v8c0 6.6 5.4 12 12 12h132c26.5 0 48-21.5 48-48z">
                         </path>
-                    </svg>Войти</a>
+                    </svg>Профиль</a>
             </div>
         </header>
-
 
 
         <main class="main">
             <div class="main-container">
                 <div class="air-left"></div>
                 <div>
-                    <div class="content">
-                        <div class="title content-animation">
-                            <h2>Форум</h2>
+                    {% for thread in threads %}
+                        <div class="content">
+                            <div class="text content-animation">
+                                <p><strong>{{ thread.topic }}</strong></p>
+                                <p>{{ thread.paragraph }}</p>
+                                <p class="date">{{ thread.open_date }}</p>
+                                <a href="/thread/{{thread.theme_id}}">ссыл очка</a>
+                            </div>
                         </div>
+                    {% endfor %}
+
+                    <div class="content">
                         <div class="text content-animation">
                             <strong>Интегрированная среда разработки, ИСР</strong> (англ. Integrated development environment — IDE) — комплекс программных средств, используемый программистами для разработки программного обеспечения (ПО).
                             Среда разработки включает в себя: текстовый редактор, транслятор (компилятор или интерпретатор), средства автоматизации сборки и отладчик.
                             Иногда содержит также средства для интеграции с системами управления версиями и разнообразные инструменты для упрощения конструирования графического интерфейса пользователя.
-                        </div>
-                        <div class="text content-animation">
-                            Многие современные приложения разработки также включают браузер классов, инспектор объектов и диаграмму иерархии классов — для использования при объектно-ориентированной разработке ПО.
-                            ИСР обычно предназначены для нескольких языков программирования — такие как IntelliJ IDEA, NetBeans, Eclipse, Qt Creator, Geany, Embarcadero RAD Studio, Code::Blocks, Xcode или Microsoft Visual Studio, но есть и IDE для одного определённого языка программирования — как, например, Visual Basic, Delphi, Dev-C++.
-                            Частный случай ИСР — среды визуальной разработки, которые включают в себя возможность наглядного редактирования интерфейса программы.
                         </div>
                     </div>
                 </div>
                 <div class="air-right"></div>
             </div>
         </main>
-
 
 
         <footer class="footer">

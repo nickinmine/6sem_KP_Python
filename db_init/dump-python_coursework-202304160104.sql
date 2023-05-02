@@ -15,7 +15,7 @@ CREATE FUNCTION public.thread_is_opened_checker() RETURNS trigger
 	declare
 		res varchar;
 	BEGIN
-		IF (select is_closed from theme_thread where theme_id = new.theme_id) then
+		IF (select is_closed from thread where theme_id = new.theme_id) then
 		raise exception 'Access denied. The theme is closed.';		
 		END IF;
 		return NEW;
@@ -74,7 +74,7 @@ ALTER TABLE public.role ALTER COLUMN role_id ADD GENERATED ALWAYS AS IDENTITY (
     CACHE 1
 );
 
-CREATE TABLE public.theme_thread (
+CREATE TABLE public.thread (
     theme_id smallint NOT NULL,
     author_uuid uuid NOT NULL,
     topic character varying NOT NULL,
@@ -84,10 +84,10 @@ CREATE TABLE public.theme_thread (
     close_date timestamp without time zone
 );
 
-ALTER TABLE public.theme_thread OWNER TO postgres;
+ALTER TABLE public.thread OWNER TO postgres;
 
-ALTER TABLE public.theme_thread ALTER COLUMN theme_id ADD GENERATED ALWAYS AS IDENTITY (
-    SEQUENCE NAME public.theme_thread_theme_id_seq
+ALTER TABLE public.thread ALTER COLUMN theme_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.thread_theme_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -116,8 +116,8 @@ INSERT INTO public.role OVERRIDING SYSTEM VALUE VALUES (2, 'user');
 INSERT INTO public.role OVERRIDING SYSTEM VALUE VALUES (3, 'moderator');
 INSERT INTO public.role OVERRIDING SYSTEM VALUE VALUES (4, 'administrator');
 
-INSERT INTO public.theme_thread OVERRIDING SYSTEM VALUE VALUES (1, '4d5934c9-70f3-422f-94fb-9777b13e316d', 'first', 'tekst', true, '2023-04-13 22:49:24.417412', '2023-04-13 22:49:38.149785');
-INSERT INTO public.theme_thread OVERRIDING SYSTEM VALUE VALUES (2, '4d5934c9-70f3-422f-94fb-9777b13e316d', 'second', 'test paragraph', false, '2023-04-13 22:50:00.823244', NULL);
+INSERT INTO public.thread OVERRIDING SYSTEM VALUE VALUES (1, '4d5934c9-70f3-422f-94fb-9777b13e316d', 'first', 'tekst', true, '2023-04-13 22:49:24.417412', '2023-04-13 22:49:38.149785');
+INSERT INTO public.thread OVERRIDING SYSTEM VALUE VALUES (2, '4d5934c9-70f3-422f-94fb-9777b13e316d', 'second', 'test paragraph', false, '2023-04-13 22:50:00.823244', NULL);
 
 INSERT INTO public."user" VALUES ('4d5934c9-70f3-422f-94fb-9777b13e316d', 4, 'root', '63a9f0ea7bb98050796b649e85481845', 'root', NULL);
 INSERT INTO public."user" VALUES ('39ceeec0-17f6-4872-8339-135b35df4aaf', 4, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Администратор', NULL);
@@ -128,7 +128,7 @@ SELECT pg_catalog.setval('public.post_post_id_seq', 6, true);
 
 SELECT pg_catalog.setval('public.role_role_id_seq', 4, true);
 
-SELECT pg_catalog.setval('public.theme_thread_theme_id_seq', 2, true);
+SELECT pg_catalog.setval('public.thread_theme_id_seq', 2, true);
 
 ALTER TABLE ONLY public.post
     ADD CONSTRAINT post_pk PRIMARY KEY (post_id);
@@ -136,8 +136,8 @@ ALTER TABLE ONLY public.post
 ALTER TABLE ONLY public.role
     ADD CONSTRAINT role_pk PRIMARY KEY (role_id);
 
-ALTER TABLE ONLY public.theme_thread
-    ADD CONSTRAINT theme_thread_pk PRIMARY KEY (theme_id);
+ALTER TABLE ONLY public.thread
+    ADD CONSTRAINT thread_pk PRIMARY KEY (theme_id);
 
 ALTER TABLE ONLY public."user"
     ADD CONSTRAINT user_pk PRIMARY KEY (user_uuid);
@@ -145,14 +145,14 @@ ALTER TABLE ONLY public."user"
 ALTER TABLE ONLY public."user"
     ADD CONSTRAINT user_un UNIQUE (login);
 
-CREATE TRIGGER auto_theme_close_date BEFORE UPDATE ON public.theme_thread FOR EACH ROW EXECUTE FUNCTION public.trigger_auto_theme_close_date();
+CREATE TRIGGER auto_theme_close_date BEFORE UPDATE ON public.thread FOR EACH ROW EXECUTE FUNCTION public.trigger_auto_theme_close_date();
 
 CREATE TRIGGER thread_checker_insert BEFORE INSERT ON public.post FOR EACH ROW EXECUTE FUNCTION public.thread_is_opened_checker();
 
 CREATE TRIGGER thread_checker_update BEFORE UPDATE ON public.post FOR EACH ROW EXECUTE FUNCTION public.thread_is_opened_checker();
 
 ALTER TABLE ONLY public.post
-    ADD CONSTRAINT post_fk_1 FOREIGN KEY (theme_id) REFERENCES public.theme_thread(theme_id) ON DELETE CASCADE;
+    ADD CONSTRAINT post_fk_1 FOREIGN KEY (theme_id) REFERENCES public.thread(theme_id) ON DELETE CASCADE;
 
 ALTER TABLE ONLY public."user"
     ADD CONSTRAINT user_fk FOREIGN KEY (role_id) REFERENCES public.role(role_id) ON DELETE SET NULL;

@@ -1,16 +1,13 @@
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, String, Integer
-
-db = SQLAlchemy()
+from conf.config import db
 
 
 class User(db.Model):
     __tablename__ = 'user'
-    user_uuid = Column(String(), nullable=True, primary_key=True)
-    role_id = Column(Integer(), nullable=False)
-    login = Column(String(), unique=True, nullable=False)
-    password = Column(String(), nullable=False)
-    name = Column(String(), nullable=False)
+    user_uuid = db.Column(db.String(), nullable=False, primary_key=True)
+    role_id = db.Column(db.Integer(), nullable=False)
+    login = db.Column(db.String(), unique=True, nullable=False)
+    password = db.Column(db.String(), nullable=False)
+    name = db.Column(db.String(), nullable=False)
 
     def __repr__(self):
         return f"{self.user_uuid}, {self.role_id}, {self.login}, {self.name}"

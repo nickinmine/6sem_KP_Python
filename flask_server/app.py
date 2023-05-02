@@ -1,4 +1,5 @@
 import hashlib
+import modulefinder
 import sys
 import uuid
 
@@ -7,13 +8,14 @@ from flask import Flask, render_template, redirect, request, session
 # from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
-from conf.config import Config
+from conf.config import Config, db
 from models.User import User
+from models.Thread import Thread
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 #from sqlalchemy.orm import session, sessionmaker
 
 
-db = SQLAlchemy()
+#db = SQLAlchemy()
 app = Flask(__name__)
 login_manager = LoginManager(app)
 #Session = sessionmaker()
@@ -47,9 +49,9 @@ def test():
     # users = con.execute(text('select version()'))
     # users = db.session.query(User).all() #- теперь работает
     # users = db.session.query(User).all()
-    # users = User.query.all() - не работает
-    users = con.execute(text('select name, login, role_name from public."user" join role r on r.role_id = '
-                             '"user".role_id'))
+    users = User.query.all() #- не работает
+    #users = con.execute(text('select name, login, role_name from public."user" join role r on r.role_id = '
+    #                         '"user".role_id'))
     return render_template('test.html', users=users)
 
 
@@ -133,6 +135,19 @@ def change_name():
 @login_required
 def change_password():
     return redirect('/profile')
+
+
+@app.route("/thread", methods=['GET'])
+def thread_list():
+    threads = Thread.query.all()
+
+    print(threads, file=sys.stderr)
+    return render_template('threads.html', threads=threads)
+
+
+@app.route("/thread/<thread_id>", methods=['GET'])
+def thread_id(thread_id=0):
+    return render_template('')
 
 
 #@login_manager.unauthorized_handler

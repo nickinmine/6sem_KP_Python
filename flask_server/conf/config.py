@@ -1,3 +1,7 @@
+from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy()
+
+
 class Config(object):
     DEBUG = True
     TESTING = True
