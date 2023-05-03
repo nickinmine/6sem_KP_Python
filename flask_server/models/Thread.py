@@ -4,7 +4,7 @@ from conf.config import db
 class Thread(db.Model):
     __tablename__ = 'thread'
     theme_id = db.Column(db.Integer, primary_key=True)
-    author_uuid = db.Column(db.String(), nullable=False)
+    author_uuid = db.Column(db.String(), db.ForeignKey('user.user_uuid'), nullable=False)
     topic = db.Column(db.Integer(), nullable=False)
     paragraph = db.Column(db.String(), nullable=True)
     is_closed = db.Column(db.String(), nullable=False)

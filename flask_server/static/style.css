@@ -59,7 +59,7 @@ body {
     vertical-align: center;
     position: relative;
     z-index: 5;
-    width: 100px;
+    width: 120px;
     height: 40px;
 }
 
@@ -79,12 +79,18 @@ body {
     vertical-align: center;
     position: relative;
     z-index: 5;
-    width: 100px;
+    width: 120px;
     height: 40px;
 }
 
+.header-logo:hover,
+.header-auth:hover,
+.button:hover {
+    background-color: #9ad5ff;
+}
+
 .header-menu {
-    width: 100px;
+    width: 120px;
 }
 
 .header-span-text {

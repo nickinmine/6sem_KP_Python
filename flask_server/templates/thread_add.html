@@ -3,12 +3,11 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Список форумов</title>
+    <title>Создать тему</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../static/images/logo.svg" type="image/png">
     <link rel="stylesheet" href="../static/threads.css">
 </head>
-
 <body>
     <div class="page">
         <header class="header">
@@ -16,7 +15,7 @@
                 <div class="header-menu">
                     <a href="/thread" class="header-logo" title="К списку форумов">К форумам</a>
                 </div>
-                <span class="header-span-text">Список форумов</span>
+                <span class="header-span-text">Создать тему</span>
                 <a href="/auth" class="header-auth" title="Профиль">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="19" height="17">
                         <path d="M184 83.5l164.5 164c4.7 4.7 4.7 12.3 0 17L184 428.5c-4.7
@@ -30,38 +29,38 @@
             </div>
         </header>
 
-
         <main class="main">
             <div class="main-container">
                 <div class="air-left"></div>
                 <div class="threads">
-                    {% for thread in threads %}
-                        <div class="content">
-                            <div class="text">
-                                <p><strong>{{ thread.topic }}</strong></p>
-                                <p>{{ thread.paragraph }}</p>
-                                <p class="date">
-                                    Автор: <a href="/user/{{ thread.author_login }}" >{{ thread.author_name }}</a>, дата публикации темы: {{ thread.open_date }}
-                                    {% if thread.close_date %}
-                                        <br>Дата закрытия темы: {{ thread.close_date }}
-                                    {% endif %}
-                                </p>
-                                <div class="main-menu">
-                                    <div class="button" onclick="document.location.href='/thread/{{thread.theme_id}}'">Перейти к теме</div>
-                                </div>
-                            </div>
+                    <div class="content">
+                        <div class="text">
+                            <form method="post">
+                                <p class="form-name">Создание новой темы</p>
+                                <label>Тема</label>
+                                <label>
+                                    <input type="text" name="topic" placeholder="Введите название темы" required>
+                                </label>
+                                <label>Описание</label>
+                                <label>
+                                    <input type="text" name="paragraph" placeholder="Опишите тему" required>
+                                </label>
+                                <button type="submit" title="Отправить форму">Создать тему</button>
+                            </form>
+                            <br>
+                            <br>
+                            <br>
                         </div>
-                    {% endfor %}
-
-
-                    <div class="main-menu">
-                        <div class="button add" onclick="document.location.href='/thread/add'"><img src="https://img.icons8.com/material-outlined/24/null/pencil--v2.png"/>Создать свою тему</div>
                     </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                 </div>
                 <div class="air-right"></div>
             </div>
         </main>
-
 
         <footer class="footer">
             <div class="footer-container">

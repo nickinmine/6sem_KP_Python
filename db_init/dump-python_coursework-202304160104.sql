@@ -35,6 +35,17 @@ $$;
 
 ALTER FUNCTION public.trigger_auto_theme_close_date() OWNER TO postgres;
 
+CREATE FUNCTION public.trigger_auto_theme_open_date() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+	BEGIN
+	NEW.open_date=now();
+	RETURN NEW;
+	END;
+$$;
+
+ALTER FUNCTION public.trigger_auto_theme_open_date() OWNER TO postgres;
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -80,7 +91,7 @@ CREATE TABLE public.thread (
     topic character varying NOT NULL,
     paragraph text,
     is_closed boolean DEFAULT false,
-    open_date timestamp without time zone DEFAULT now() NOT NULL,
+    open_date timestamp without time zone DEFAULT now(),
     close_date timestamp without time zone
 );
 
@@ -111,10 +122,10 @@ INSERT INTO public.post OVERRIDING SYSTEM VALUE VALUES (2, '4d5934c9-70f3-422f-9
 INSERT INTO public.post OVERRIDING SYSTEM VALUE VALUES (3, '4d5934c9-70f3-422f-94fb-9777b13e316d', 1, 'riehijgbreh', '2023-04-14 09:31:24.527537');
 INSERT INTO public.post OVERRIDING SYSTEM VALUE VALUES (6, '4d5934c9-70f3-422f-94fb-9777b13e316d', 2, 'riehijgbreh eht', '2023-04-14 09:33:49.803292');
 
-INSERT INTO public.role OVERRIDING SYSTEM VALUE VALUES (1, 'guest');
-INSERT INTO public.role OVERRIDING SYSTEM VALUE VALUES (2, 'user');
-INSERT INTO public.role OVERRIDING SYSTEM VALUE VALUES (3, 'moderator');
-INSERT INTO public.role OVERRIDING SYSTEM VALUE VALUES (4, 'administrator');
+INSERT INTO public.role OVERRIDING SYSTEM VALUE VALUES (1, 'Гость');
+INSERT INTO public.role OVERRIDING SYSTEM VALUE VALUES (2, 'Пользователь');
+INSERT INTO public.role OVERRIDING SYSTEM VALUE VALUES (3, 'Модератор');
+INSERT INTO public.role OVERRIDING SYSTEM VALUE VALUES (4, 'Администратор');
 
 INSERT INTO public.thread OVERRIDING SYSTEM VALUE VALUES (1, '4d5934c9-70f3-422f-94fb-9777b13e316d', 'first', 'tekst', true, '2023-04-13 22:49:24.417412', '2023-04-13 22:49:38.149785');
 INSERT INTO public.thread OVERRIDING SYSTEM VALUE VALUES (2, '4d5934c9-70f3-422f-94fb-9777b13e316d', 'second', 'test paragraph', false, '2023-04-13 22:50:00.823244', NULL);
@@ -144,6 +155,8 @@ ALTER TABLE ONLY public."user"
 
 ALTER TABLE ONLY public."user"
     ADD CONSTRAINT user_un UNIQUE (login);
+
+CREATE TRIGGER auto_theme_open_date BEFORE INSERT ON public.thread FOR EACH ROW EXECUTE FUNCTION public.trigger_auto_theme_open_date();
 
 CREATE TRIGGER auto_theme_close_date BEFORE UPDATE ON public.thread FOR EACH ROW EXECUTE FUNCTION public.trigger_auto_theme_close_date();
 

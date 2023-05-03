@@ -11,6 +11,7 @@ from sqlalchemy import text
 from conf.config import Config, db
 from models.User import User
 from models.Thread import Thread
+from models.Role import Role
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 #from sqlalchemy.orm import session, sessionmaker
 
@@ -112,6 +113,14 @@ def register():
     return render_template('register.html')
 
 
+@app.route("/user/<login>", methods=['GET'])
+def user_page(login=None):
+    user = User.query.filter_by(login=login).first()
+    if user:
+        user.role_name = Role.query.filter_by(role_id=user.role_id).first()
+    return render_template('user_page.html', user=user)
+
+
 @app.route("/profile", methods=['GET'])
 @login_required
 def profile():
@@ -139,9 +148,17 @@ def change_password():
 
 @app.route("/thread", methods=['GET'])
 def thread_list():
-    threads = Thread.query.all()
-
-    print(threads, file=sys.stderr)
+    threads = Thread.query.order_by(Thread.open_date).all()
+    if threads:
+        for t in threads:
+            #user = User.query.get(t.author_uuid)
+            user = User.query.filter_by(user_uuid=t.author_uuid).first()
+            if user:
+                t.author_name = user.name
+                t.author_login = user.login
+            t.open_date = str(t.open_date)[0:-10]
+            if t.close_date:
+                t.close_date = str(t.close_date)[0:-10]
     return render_template('threads.html', threads=threads)
 
 
@@ -149,6 +166,17 @@ def thread_list():
 def thread_id(thread_id=0):
     return render_template('')
 
+
+@app.route("/thread/add", methods=['GET', 'POST'])
+@login_required
+def thread_add():
+    if request.method == 'POST':
+        topic = request.form['topic']
+        paragraph = request.form['paragraph']
+        thread = Thread(author_uuid=session['active_user_uuid'], topic=topic, paragraph=paragraph, is_closed=False)
+        db.session.add(thread)
+        db.session.commit()
+    return render_template('thread_add.html')
 
 #@login_manager.unauthorized_handler
 #def unauthorized():

@@ -4,18 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f695468-b293-4581-ae04-0ea7b821fcb2" name="Changes" comment="added profile">
-      <change afterPath="$PROJECT_DIR$/flask_server/models/Post.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flask_server/models/Thread.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flask_server/static/threads.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flask_server/templates/threads.html" afterDir="false" />
+    <list default="true" id="7f695468-b293-4581-ae04-0ea7b821fcb2" name="Changes" comment="threads (in work), some little fixes">
+      <change afterPath="$PROJECT_DIR$/flask_server/models/Role.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flask_server/static/profile.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flask_server/templates/thread_add.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flask_server/templates/user_page.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_init/dump-python_coursework-202304160104.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db_init/dump-python_coursework-202304160104.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flask_server/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flask_server/conf/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/conf/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_server/models/Thread.py" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/models/Thread.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flask_server/models/User.py" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/models/User.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_server/static/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/static/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_server/static/threads.css" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/static/threads.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flask_server/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flask_server/templates/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/templates/profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_server/templates/threads.html" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/templates/threads.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,8 +29,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -137,7 +140,8 @@
       <workItem from="1682765586077" duration="790000" />
       <workItem from="1682876141461" duration="7151000" />
       <workItem from="1682896967092" duration="401000" />
-      <workItem from="1682941877716" duration="7396000" />
+      <workItem from="1682941877716" duration="7598000" />
+      <workItem from="1683121094340" duration="16070000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1682698199832</created>
@@ -188,7 +192,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682894792243</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="threads (in work), some little fixes">
+      <created>1682989377474</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1682989377474</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,7 +221,8 @@
     <MESSAGE value="reg added" />
     <MESSAGE value="styles added" />
     <MESSAGE value="added profile" />
-    <option name="LAST_COMMIT_MESSAGE" value="added profile" />
+    <MESSAGE value="threads (in work), some little fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="threads (in work), some little fixes" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/coursework$model_User.coverage" NAME="model_User Coverage Results" MODIFIED="1681846608996" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/flask_server/models" />
