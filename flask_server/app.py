@@ -39,7 +39,9 @@ def get_sql_connect():
 @login_manager.user_loader
 def load_user(user_uuid):
     #print('load_user', file=sys.stderr)
-    return User.get(user_uuid)
+    user = User.query.filter_by(user_uuid=user_uuid).first()
+    #return User.get(user_uuid)
+    return user
 
 
 @app.route("/test")
@@ -64,22 +66,31 @@ def indexpage():
 
 @app.route("/auth", methods=['GET', 'POST'])
 def auth():
+    # старая авторизация, возможно будет удалена
+    #if request.method == 'POST':
+    #    login = request.form['login']
+    #    password = request.form['password']
+    #    #print(login, password, file=sys.stderr)
+    #    if login and password:
+    #        con = get_sql_connect()
+    #        stmt = text("select user_uuid from public.user where login=:login and password=md5(:password) limit 1")
+    #        user = con.execute(stmt, {'login': login, 'password': password}).fetchone()
+    #        if user:
+    #            for row in user:
+    #                user_uuid = str(row)
+    #                session['active_user_uuid'] = user_uuid
+    #                userlogin = User().create(user_uuid)
+    #                login_user(userlogin)
+    #                return redirect("/profile")
     if request.method == 'POST':
         login = request.form['login']
-        password = request.form['password']
-        #print(login, password, file=sys.stderr)
+        password = hashlib.md5(request.form['password'].encode())
         if login and password:
-            con = get_sql_connect()
-            stmt = text("select user_uuid from public.user where login=:login and password=md5(:password) limit 1")
-            #stmt = text(r"select user_uuid from public.user where login='root' and password='63a9f0ea7bb98050796b649e85481845' limit 1")
-            user = con.execute(stmt, {'login': login, 'password': password}).fetchone()
+            user = User.query.filter_by(login=login, password=password.hexdigest()).first()
             if user:
-                for row in user:
-                    user_uuid = str(row)
-                    session['active_user_uuid'] = user_uuid
-                    userlogin = User().create(user_uuid)
-                    login_user(userlogin)
-                    return redirect("/profile")
+                session['active_user_uuid'] = user.user_uuid
+                login_user(user)
+                return redirect("/profile")
     if 'active_user_uuid' in session:
         return redirect("/profile")
     return render_template('auth.html')
