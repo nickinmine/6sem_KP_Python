@@ -137,10 +137,13 @@ def user_page(login=None):
 def profile():
     if 'active_user_uuid' in session:
         user_uuid = session['active_user_uuid']
-        con = get_sql_connect()
-        stmt = text('select name, login, role_name from public."user" join role r on r.role_id = '
-                    '"user".role_id where user_uuid=:user_uuid')
-        user = con.execute(stmt, {'user_uuid': user_uuid}).fetchone()
+        user = User.query.filter_by(user_uuid=user_uuid).first()
+        user_role = Role.query.filter_by(role_id=user.role_id).first()
+        user.role_name = user_role.role_name
+        #con = get_sql_connect()
+        #stmt = text('select name, login, role_name from public."user" join role r on r.role_id = '
+        #            '"user".role_id where user_uuid=:user_uuid')
+        #user = con.execute(stmt, {'user_uuid': user_uuid}).fetchone()
         return render_template('profile.html', user=user)
     return render_template('profile.html')
 
@@ -148,6 +151,9 @@ def profile():
 @app.route("/profile/name", methods=['POST'])
 @login_required
 def change_name():
+    if request.method == 'POST':
+        name = request.form['name']
+
     return redirect('/profile')
 
 
@@ -187,7 +193,9 @@ def thread_add():
         thread = Thread(author_uuid=session['active_user_uuid'], topic=topic, paragraph=paragraph, is_closed=False)
         db.session.add(thread)
         db.session.commit()
+        return redirect('/thread/' + str(thread.theme_id))
     return render_template('thread_add.html')
+
 
 #@login_manager.unauthorized_handler
 #def unauthorized():

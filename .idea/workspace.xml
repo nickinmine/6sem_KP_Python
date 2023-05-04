@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f695468-b293-4581-ae04-0ea7b821fcb2" name="Changes" comment="threads (complete), user profile page (in progress), added role model, changed index content, some style, route and model fixes">
+    <list default="true" id="7f695468-b293-4581-ae04-0ea7b821fcb2" name="Changes" comment="updated auth method">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_init/dump-python_coursework-202304160104.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db_init/dump-python_coursework-202304160104.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flask_server/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_server/static/threads.css" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/static/threads.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_server/templates/thread_add.html" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/templates/thread_add.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +133,7 @@
       <workItem from="1682896967092" duration="401000" />
       <workItem from="1682941877716" duration="7598000" />
       <workItem from="1683121094340" duration="17992000" />
-      <workItem from="1683228537280" duration="2000000" />
+      <workItem from="1683228537280" duration="4817000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1682698199832</created>
@@ -195,7 +198,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683155838234</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="updated auth method">
+      <created>1683230631476</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1683230631476</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,7 +229,8 @@
     <MESSAGE value="added profile" />
     <MESSAGE value="threads (in work), some little fixes" />
     <MESSAGE value="threads (complete), user profile page (in progress), added role model, changed index content, some style, route and model fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="threads (complete), user profile page (in progress), added role model, changed index content, some style, route and model fixes" />
+    <MESSAGE value="updated auth method" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated auth method" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/coursework$model_User.coverage" NAME="model_User Coverage Results" MODIFIED="1681846608996" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/flask_server/models" />

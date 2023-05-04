@@ -148,6 +148,11 @@ body {
 
 }
 
+button {
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+}
+
 .header-logo:hover,
 .header-auth:hover,
 .button:hover {
@@ -221,7 +226,12 @@ p {
 
 .threads {
         width: 100%;
-    }
+}
+
+.topic {
+    width: 100%;
+    font-size: 16px;
+}
 
 @media (min-width: 769px) {
     .air-left, .air-right {
