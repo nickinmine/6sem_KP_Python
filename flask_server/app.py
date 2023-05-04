@@ -187,7 +187,9 @@ def thread_add():
         thread = Thread(author_uuid=session['active_user_uuid'], topic=topic, paragraph=paragraph, is_closed=False)
         db.session.add(thread)
         db.session.commit()
+        return redirect('/thread/' + str(thread.theme_id))
     return render_template('thread_add.html')
+
 
 #@login_manager.unauthorized_handler
 #def unauthorized():
