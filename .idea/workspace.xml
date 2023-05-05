@@ -7,9 +7,11 @@
     <list default="true" id="7f695468-b293-4581-ae04-0ea7b821fcb2" name="Changes" comment="updated auth method">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_init/dump-python_coursework-202304160104.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db_init/dump-python_coursework-202304160104.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flask_server/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_server/static/profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/static/profile.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flask_server/static/threads.css" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/static/threads.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flask_server/templates/thread_add.html" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/templates/thread_add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_server/templates/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/templates/profile.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +135,7 @@
       <workItem from="1682896967092" duration="401000" />
       <workItem from="1682941877716" duration="7598000" />
       <workItem from="1683121094340" duration="17992000" />
-      <workItem from="1683228537280" duration="4817000" />
+      <workItem from="1683228537280" duration="13151000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1682698199832</created>
@@ -205,7 +207,28 @@
       <option name="project" value="LOCAL" />
       <updated>1683230631476</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="database time zone fix">
+      <created>1683233531529</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1683233531529</updated>
+    </task>
+    <task id="LOCAL-00012" summary="updated thread add functional and page style">
+      <created>1683233631993</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1683233631993</updated>
+    </task>
+    <task id="LOCAL-00013" summary="updated auth method">
+      <created>1683237868402</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1683237868402</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -229,6 +252,8 @@
     <MESSAGE value="added profile" />
     <MESSAGE value="threads (in work), some little fixes" />
     <MESSAGE value="threads (complete), user profile page (in progress), added role model, changed index content, some style, route and model fixes" />
+    <MESSAGE value="database time zone fix" />
+    <MESSAGE value="updated thread add functional and page style" />
     <MESSAGE value="updated auth method" />
     <option name="LAST_COMMIT_MESSAGE" value="updated auth method" />
   </component>

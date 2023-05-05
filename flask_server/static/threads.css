@@ -193,8 +193,7 @@ h2 {
 }
 
 p {
-    margin-top: 0px;
-
+    margin-top: 0;
     text-align: justify;
 }
 
@@ -225,7 +224,13 @@ p {
 }
 
 .threads {
-        width: 100%;
+    width: 100%;
+}
+
+.date > a, .date > a:visited{
+    text-decoration: none;
+    color: #8F0EE5;
+    font-weight: bold;
 }
 
 .topic {

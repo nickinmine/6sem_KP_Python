@@ -1,3 +1,40 @@
 .header-auth:hover {
     background-color: #B30909;
 }
+
+.button {
+    font-size: 18px;
+    padding: 6px;
+    cursor: pointer;
+    border-radius: 35px;
+    width: auto;
+    text-align: center;
+    background-color: rgba(0,0,0,0.2);
+
+}
+
+button {
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+}
+
+.profile {
+    width: 100%;
+}
+
+input{
+    display:block;
+    width: auto;
+    padding:5px 10px;
+    margin:10px auto;
+    border: none;
+}
+
+.userdata {
+    display: flex;
+    flex-direction: row;
+}
+
+.userdata > img {
+    margin-right: 20px;
+}

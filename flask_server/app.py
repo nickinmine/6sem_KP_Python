@@ -153,13 +153,43 @@ def profile():
 def change_name():
     if request.method == 'POST':
         name = request.form['name']
-
+        if 'active_user_uuid' in session:
+            user_uuid = session['active_user_uuid']
+            user = User.query.filter_by(user_uuid=user_uuid).first()
+            if user:
+                user.name = name
+                db.session.commit()
     return redirect('/profile')
 
 
 @app.route("/profile/password", methods=['POST'])
 @login_required
 def change_password():
+    if request.method == 'POST':
+        oldpassword = hashlib.md5(request.form['oldpassword'].encode())
+        newpassword = hashlib.md5(request.form['newpassword'].encode())
+        newpassword2 = hashlib.md5(request.form['newpassword2'].encode())
+        if newpassword.hexdigest() == newpassword2.hexdigest():
+            if 'active_user_uuid' in session:
+                user_uuid = session['active_user_uuid']
+                user = User.query.filter_by(user_uuid=user_uuid).first()
+                if user.password == oldpassword.hexdigest():
+                    user.password = newpassword.hexdigest()
+                    db.session.commit()
+    return redirect('/profile')
+
+
+@app.route("/profile/avatar", methods=['POST'])
+@login_required
+def change_avatar():
+    if request.method == 'POST':
+        avatar_url = request.form['avatar']
+        if 'active_user_uuid' in session:
+            user_uuid = session['active_user_uuid']
+            user = User.query.filter_by(user_uuid=user_uuid).first()
+            if user:
+                user.avatar = avatar_url
+                db.session.commit()
     return redirect('/profile')
 
 
@@ -179,7 +209,7 @@ def thread_list():
     return render_template('threads.html', threads=threads)
 
 
-@app.route("/thread/<thread_id>", methods=['GET'])
+@app.route("/thread/<thread_id>", methods=['GET', 'PUT', 'DELETE'])
 def thread_id(thread_id=0):
     return render_template('')
 

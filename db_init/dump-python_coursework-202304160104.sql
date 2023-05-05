@@ -128,12 +128,12 @@ INSERT INTO public.role OVERRIDING SYSTEM VALUE VALUES (2, 'Пользовате
 INSERT INTO public.role OVERRIDING SYSTEM VALUE VALUES (3, 'Модератор');
 INSERT INTO public.role OVERRIDING SYSTEM VALUE VALUES (4, 'Администратор');
 
-INSERT INTO public.thread OVERRIDING SYSTEM VALUE VALUES (1, '4d5934c9-70f3-422f-94fb-9777b13e316d', 'first', 'tekst', true, '2023-04-13 22:49:24.417412', '2023-04-13 22:49:38.149785');
+INSERT INTO public.thread OVERRIDING SYSTEM VALUE VALUES (1, '4d5934c9-70f3-422f-94fb-9777b13e316d', 'first', 'test', true, '2023-04-13 22:49:24.417412', '2023-04-13 22:52:38.149785');
 INSERT INTO public.thread OVERRIDING SYSTEM VALUE VALUES (2, '4d5934c9-70f3-422f-94fb-9777b13e316d', 'second', 'test paragraph', false, '2023-04-13 22:50:00.823244', NULL);
 
 INSERT INTO public."user" VALUES ('4d5934c9-70f3-422f-94fb-9777b13e316d', 4, 'root', '63a9f0ea7bb98050796b649e85481845', 'root', NULL);
 INSERT INTO public."user" VALUES ('39ceeec0-17f6-4872-8339-135b35df4aaf', 4, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Администратор', NULL);
-INSERT INTO public."user" VALUES ('d9ce0ae6-90b5-4a67-8cb1-57c96ce223b7', 2, 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 'Пользователь', NULL);
+INSERT INTO public."user" VALUES ('d9ce0ae6-90b5-4a67-8cb1-57c96ce223b7', 2, 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 'Пользователь', 'https://www.shareicon.net/data/256x256/2016/05/24/770117_people_512x512.png');
 INSERT INTO public."user" VALUES ('3621dda6-2a56-41c9-9966-adc8bac23b0e', 3, 'moderator', '0408f3c997f309c03b08bf3a4bc7b730', 'Модератор', NULL);
 
 SELECT pg_catalog.setval('public.post_post_id_seq', 6, true);
