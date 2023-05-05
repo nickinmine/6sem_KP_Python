@@ -12,6 +12,7 @@ from conf.config import Config, db
 from models.User import User
 from models.Thread import Thread
 from models.Role import Role
+from models.Post import Post
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 #from sqlalchemy.orm import session, sessionmaker
 
@@ -127,8 +128,10 @@ def register():
 @app.route("/user/<login>", methods=['GET'])
 def user_page(login=None):
     user = User.query.filter_by(login=login).first()
-    if user:
-        user.role_name = Role.query.filter_by(role_id=user.role_id).first()
+    user_role = Role.query.filter_by(role_id=user.role_id).first()
+    user.role_name = user_role.role_name
+    user.thread_count = Thread.query.filter_by(author_uuid=user.user_uuid).count()
+    user.post_count = Post.query.filter_by(author_uuid=user.user_uuid).count()
     return render_template('user_page.html', user=user)
 
 
@@ -209,7 +212,7 @@ def thread_list():
     return render_template('threads.html', threads=threads)
 
 
-@app.route("/thread/<thread_id>", methods=['GET', 'PUT', 'DELETE'])
+@app.route("/thread/<int:thread_id>", methods=['GET', 'PUT', 'DELETE'])
 def thread_id(thread_id=0):
     return render_template('')
 
@@ -229,7 +232,12 @@ def thread_add():
 
 #@login_manager.unauthorized_handler
 #def unauthorized():
-#    return 'tekst'
+#    return 'tekst', 401
+
+
+#@app.errorhandler(404)
+#def page_not_found(error):
+#    return render_template('page_not_found.html'), 404
 
 
 app = create_app(Config)

@@ -4,14 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f695468-b293-4581-ae04-0ea7b821fcb2" name="Changes" comment="updated auth method">
+    <list default="true" id="7f695468-b293-4581-ae04-0ea7b821fcb2" name="Changes" comment="finished user profile page with forms">
+      <change afterPath="$PROJECT_DIR$/flask_server/static/user_page.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_init/dump-python_coursework-202304160104.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db_init/dump-python_coursework-202304160104.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flask_server/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flask_server/static/profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/static/profile.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flask_server/static/threads.css" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/static/threads.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flask_server/templates/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/templates/profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_server/models/Post.py" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/models/Post.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_server/templates/user_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server/templates/user_page.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,9 +19,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
         <option value="HTML File" />
         <option value="Python Script" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -135,7 +133,8 @@
       <workItem from="1682896967092" duration="401000" />
       <workItem from="1682941877716" duration="7598000" />
       <workItem from="1683121094340" duration="17992000" />
-      <workItem from="1683228537280" duration="13151000" />
+      <workItem from="1683228537280" duration="14461000" />
+      <workItem from="1683324860865" duration="1325000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1682698199832</created>
@@ -228,7 +227,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683237868402</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="finished user profile page with forms">
+      <created>1683246608921</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1683246608921</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -255,7 +261,8 @@
     <MESSAGE value="database time zone fix" />
     <MESSAGE value="updated thread add functional and page style" />
     <MESSAGE value="updated auth method" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated auth method" />
+    <MESSAGE value="finished user profile page with forms" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished user profile page with forms" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/coursework$model_User.coverage" NAME="model_User Coverage Results" MODIFIED="1681846608996" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/flask_server/models" />

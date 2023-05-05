@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../static/images/logo.svg" type="image/png">
     <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/user_page.css">
 </head>
 <body>
     <div class="page">
@@ -34,15 +35,43 @@
                 <div class="air-left"></div>
                 <div class="profile">
                     <div class="content">
-                        <div class="text">
-                            {{ user.name }}
-                            {{ user.role_name }}
-
-                            <br>
+                        <div class="title">
+                            <h2>Личные данные</h2>
+                            <div class="userdata">
+                                {% if user.avatar %}
+                                    <img width="256" height="256" src="{{ user.avatar }}">
+                                {% else %}
+                                    <img width="256" height="256" src="data:image/png;base64,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">
+                                {% endif %}
+                                <div>
+                                    <p>Имя на форуме: {{ user.name }}</p>
+                                    <p>Логин: {{ user.login }}</p>
+                                    <p>Роль: {{ user.role_name }}</p>
+                                    <p>Открыто тем: {{ user.thread_count }}</p>
+                                    <p>Написано сообщений: {{ user.post_count }}</p>
+                                </div>
+                            </div>
                             <br>
                             <br>
                         </div>
                     </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                     <br>
                     <br>
                     <br>
