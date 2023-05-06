@@ -125,6 +125,9 @@ def register():
     return render_template('register.html')
 
 
+
+
+
 @app.route("/user/<login>", methods=['GET'])
 def user_page(login=None):
     user = User.query.filter_by(login=login).first_or_404()
@@ -241,16 +244,18 @@ def thread_list():
 def thread_id(thread_id=0):
     thread = Thread.query.filter_by(theme_id=thread_id).first_or_404()
     author = User.query.filter_by(user_uuid=thread.author_uuid).first()
-    thread.author_login = author.login
-    thread.author_name = author.name
+    if author:
+        thread.author_login = author.login
+        thread.author_name = author.name
     thread.open_date = str(thread.open_date)[0:-10]
     if thread.close_date:
         thread.close_date = str(thread.close_date)[0:-10]
     posts = Post.query.filter_by(theme_id=thread_id).order_by(Post.post_date).all()
     for post in posts:
         user = User.query.filter_by(user_uuid=post.author_uuid).first()
-        post.author_login = user.login
-        post.author_name = user.name
+        if user:
+            post.author_login = user.login
+            post.author_name = user.name
         post.post_date_short = str(post.post_date)[0:-10]
     return render_template('post.html', thread=thread, posts=posts)
 

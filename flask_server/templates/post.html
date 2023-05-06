@@ -38,10 +38,17 @@
                             <p><strong>{{ thread.topic }}</strong></p>
                             <p>{{ thread.paragraph }}</p>
                             <p class="date">
+                            {% if thread.author_login %}
                                 Автор темы: <a href="/user/{{ thread.author_login }}" >{{ thread.author_name }}</a>, дата публикации темы: {{ thread.open_date }}
                                 {% if thread.close_date %}
                                     <br>Дата закрытия темы: {{ thread.close_date }}
                                 {% endif %}
+                            {% else %}
+                                Дата публикации темы: {{ thread.open_date }}
+                                {% if thread.close_date %}
+                                    <br>Дата закрытия темы: {{ thread.close_date }}
+                                {% endif %}
+                            {% endif %}
                             </p>
                         </div>
                     </div>
@@ -49,9 +56,15 @@
                         <div class="content">
                             <div class="text">
                                 <p>{{ post.paragraph }}</p>
-                                <p class="date">
-                                    Автор комментария: <a href="/user/{{ post.author_login }}" >{{ post.author_name }}</a>, дата публикации комментария: {{ post.post_date_short }}
-                                </p>
+                                {% if post.author_login %}
+                                    <p class="date">
+                                        Автор комментария: <a href="/user/{{ post.author_login }}" >{{ post.author_name }}</a>, дата публикации комментария: {{ post.post_date_short }}
+                                    </p>
+                                {% else %}
+                                    <p class="date">
+                                        Дата публикации комментария: {{ post.post_date_short }}
+                                    </p>
+                                {% endif %}
                             </div>
                         </div>
                     {% endfor %}

@@ -41,9 +41,16 @@
                                 <p><strong>{{ thread.topic }}</strong></p>
                                 <p>{{ thread.paragraph }}</p>
                                 <p class="date">
-                                    Автор: <a href="/user/{{ thread.author_login }}" >{{ thread.author_name }}</a>, дата публикации темы: {{ thread.open_date }}
-                                    {% if thread.close_date %}
-                                        <br>Дата закрытия темы: {{ thread.close_date }}
+                                    {% if thread.author_login %}
+                                        Автор: <a href="/user/{{ thread.author_login }}" >{{ thread.author_name }}</a>, дата публикации темы: {{ thread.open_date }}
+                                        {% if thread.close_date %}
+                                            <br>Дата закрытия темы: {{ thread.close_date }}
+                                        {% endif %}
+                                    {% else %}
+                                        Дата публикации темы: {{ thread.open_date }}
+                                        {% if thread.close_date %}
+                                            <br>Дата закрытия темы: {{ thread.close_date }}
+                                        {% endif %}
                                     {% endif %}
                                 </p>
                                 <div class="main-menu">
