@@ -47,6 +47,17 @@ $$;
 
 ALTER FUNCTION public.trigger_auto_theme_open_date() OWNER TO postgres;
 
+CREATE FUNCTION public.trigger_auto_theme_post_date() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+	BEGIN
+	NEW.post_date=now();
+	RETURN NEW;
+	END;
+$$;
+
+ALTER FUNCTION public.trigger_auto_theme_post_date() OWNER TO postgres;
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -56,7 +67,7 @@ CREATE TABLE public.post (
     author_uuid uuid NOT NULL,
     theme_id smallint NOT NULL,
     paragraph text NOT NULL,
-    post_date timestamp without time zone DEFAULT now() NOT NULL
+    post_date timestamp without time zone DEFAULT now()
 );
 
 ALTER TABLE public.post OWNER TO postgres;
@@ -119,28 +130,27 @@ CREATE TABLE public."user" (
 ALTER TABLE public."user" OWNER TO postgres;
 
 INSERT INTO public.post OVERRIDING SYSTEM VALUE VALUES (1, '4d5934c9-70f3-422f-94fb-9777b13e316d', 1, 'test data', '2023-04-13 22:50:59.030834');
-INSERT INTO public.post OVERRIDING SYSTEM VALUE VALUES (2, '4d5934c9-70f3-422f-94fb-9777b13e316d', 2, 'new test data', '2023-04-14 09:31:14.703733');
-INSERT INTO public.post OVERRIDING SYSTEM VALUE VALUES (3, '4d5934c9-70f3-422f-94fb-9777b13e316d', 1, 'riehijgbreh', '2023-04-14 09:31:24.527537');
-INSERT INTO public.post OVERRIDING SYSTEM VALUE VALUES (6, '4d5934c9-70f3-422f-94fb-9777b13e316d', 2, 'riehijgbreh eht', '2023-04-14 09:33:49.803292');
+INSERT INTO public.post OVERRIDING SYSTEM VALUE VALUES (2, '4d5934c9-70f3-422f-94fb-9777b13e316d', 1, 'new test data', '2023-04-13 22:52:38.149785');
 
 INSERT INTO public.role OVERRIDING SYSTEM VALUE VALUES (1, 'Гость');
 INSERT INTO public.role OVERRIDING SYSTEM VALUE VALUES (2, 'Пользователь');
 INSERT INTO public.role OVERRIDING SYSTEM VALUE VALUES (3, 'Модератор');
 INSERT INTO public.role OVERRIDING SYSTEM VALUE VALUES (4, 'Администратор');
 
-INSERT INTO public.thread OVERRIDING SYSTEM VALUE VALUES (1, '4d5934c9-70f3-422f-94fb-9777b13e316d', 'first', 'test', true, '2023-04-13 22:49:24.417412', '2023-04-13 22:52:38.149785');
-INSERT INTO public.thread OVERRIDING SYSTEM VALUE VALUES (2, '4d5934c9-70f3-422f-94fb-9777b13e316d', 'second', 'test paragraph', false, '2023-04-13 22:50:00.823244', NULL);
+INSERT INTO public.thread OVERRIDING SYSTEM VALUE VALUES (1, '4d5934c9-70f3-422f-94fb-9777b13e316d', 'first', 'test', true, '2023-04-13 22:49:24.417412', '2023-04-14 09:31:14.703733');
+INSERT INTO public.thread OVERRIDING SYSTEM VALUE VALUES (2, '4d5934c9-70f3-422f-94fb-9777b13e316d', 'Современные ИСР', 'test', true, '2023-04-13 22:49:24.417412', '2023-04-14 09:31:14.703733');
+INSERT INTO public.thread OVERRIDING SYSTEM VALUE VALUES (3, 'd9ce0ae6-90b5-4a67-8cb1-57c96ce223b7', 'first3', 'test', true, '2023-04-13 22:49:24.417412', '2023-04-14 09:31:14.703733');
+INSERT INTO public.thread OVERRIDING SYSTEM VALUE VALUES (4, '17a7cfb4-40c1-404d-a00a-3668f8c8cd6b', 'Всем привет!', 'Привет всем, я тут новичок, давайте знакомиться?', false, '2023-04-15 12:24:24.238724', NULL);
 
-INSERT INTO public."user" VALUES ('4d5934c9-70f3-422f-94fb-9777b13e316d', 4, 'root', '63a9f0ea7bb98050796b649e85481845', 'root', NULL);
-INSERT INTO public."user" VALUES ('39ceeec0-17f6-4872-8339-135b35df4aaf', 4, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Администратор', NULL);
-INSERT INTO public."user" VALUES ('d9ce0ae6-90b5-4a67-8cb1-57c96ce223b7', 2, 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 'Пользователь', 'https://www.shareicon.net/data/256x256/2016/05/24/770117_people_512x512.png');
-INSERT INTO public."user" VALUES ('3621dda6-2a56-41c9-9966-adc8bac23b0e', 3, 'moderator', '0408f3c997f309c03b08bf3a4bc7b730', 'Модератор', NULL);
+INSERT INTO public."user" VALUES ('4d5934c9-70f3-422f-94fb-9777b13e316d', 4, 'root', '63a9f0ea7bb98050796b649e85481845', 'Суперадмин', 'https://www.shareicon.net/data/256x256/2016/05/24/770117_people_512x512.png');
+INSERT INTO public."user" VALUES ('d9ce0ae6-90b5-4a67-8cb1-57c96ce223b7', 2, 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 'Пользователь', 'https://www.shareicon.net/data/256x256/2016/05/24/770118_people_512x512.png');
+INSERT INTO public."user" VALUES ('17a7cfb4-40c1-404d-a00a-3668f8c8cd6b', 2, 'user2', '7e58d63b60197ceb55a1c487989a3720', 'Новенький', NULL);
 
-SELECT pg_catalog.setval('public.post_post_id_seq', 6, true);
+SELECT pg_catalog.setval('public.post_post_id_seq', 2, true);
 
 SELECT pg_catalog.setval('public.role_role_id_seq', 4, true);
 
-SELECT pg_catalog.setval('public.thread_theme_id_seq', 2, true);
+SELECT pg_catalog.setval('public.thread_theme_id_seq', 4, true);
 
 ALTER TABLE ONLY public.post
     ADD CONSTRAINT post_pk PRIMARY KEY (post_id);
@@ -164,6 +174,8 @@ CREATE TRIGGER auto_theme_close_date BEFORE UPDATE ON public.thread FOR EACH ROW
 CREATE TRIGGER thread_checker_insert BEFORE INSERT ON public.post FOR EACH ROW EXECUTE FUNCTION public.thread_is_opened_checker();
 
 CREATE TRIGGER thread_checker_update BEFORE UPDATE ON public.post FOR EACH ROW EXECUTE FUNCTION public.thread_is_opened_checker();
+
+CREATE TRIGGER auto_post_date BEFORE INSERT ON public.post FOR EACH ROW EXECUTE FUNCTION public.trigger_auto_theme_post_date();
 
 ALTER TABLE ONLY public.post
     ADD CONSTRAINT post_fk_1 FOREIGN KEY (theme_id) REFERENCES public.thread(theme_id) ON DELETE CASCADE;

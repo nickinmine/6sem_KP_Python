@@ -10,3 +10,17 @@
 .userdata > img {
     margin-right: 20px;
 }
+
+.list {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.list:last-child {
+    margin-right: 0;
+}
+
+button {
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+}

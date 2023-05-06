@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тема - {{ thread.topic }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="../static/images/logo.svg" type="image/png">
+    <link rel="stylesheet" href="../static/threads.css">
+</head>
+<body>
+    <div class="page">
+        <header class="header">
+            <div class="header-container">
+                <div class="header-menu">
+                    <a href="/thread" class="header-logo" title="К списку форумов">К форумам</a>
+                </div>
+                <span class="header-span-text">Сообщения по теме</span>
+                <a href="/auth" class="header-auth" title="Профиль">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="19" height="17">
+                        <path d="M184 83.5l164.5 164c4.7 4.7 4.7 12.3 0 17L184 428.5c-4.7
+                            4.7-12.3 4.7-17 0l-7.1-7.1c-4.7-4.7-4.7-12.3 0-17l132-131.4H12c-6.6
+                            0-12-5.4-12-12v-10c0-6.6 5.4-12 12-12h279.9L160 107.6c-4.7-4.7-4.7-12.3
+                            0-17l7.1-7.1c4.6-4.7 12.2-4.7 16.9 0zM512 400V112c0-26.5-21.5-48-48-48H332c-6.6
+                            0-12 5.4-12 12v8c0 6.6 5.4 12 12 12h132c8.8 0 16 7.2 16 16v288c0 8.8-7.2 16-16
+                            16H332c-6.6 0-12 5.4-12 12v8c0 6.6 5.4 12 12 12h132c26.5 0 48-21.5 48-48z">
+                        </path>
+                    </svg>Профиль</a>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="main-container">
+                <div class="air-left"></div>
+                <div class="threads">
+                    <div class="content">
+                        <div class="text">
+                            <p><strong>{{ thread.topic }}</strong></p>
+                            <p>{{ thread.paragraph }}</p>
+                            <p class="date">
+                                Автор темы: <a href="/user/{{ thread.author_login }}" >{{ thread.author_name }}</a>, дата публикации темы: {{ thread.open_date }}
+                                {% if thread.close_date %}
+                                    <br>Дата закрытия темы: {{ thread.close_date }}
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                    {% for post in posts %}
+                        <div class="content">
+                            <div class="text">
+                                <p>{{ post.paragraph }}</p>
+                                <p class="date">
+                                    Автор комментария: <a href="/user/{{ post.author_login }}" >{{ post.author_name }}</a>, дата публикации комментария: {{ post.post_date_short }}
+                                </p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% if current_user.is_authenticated %}
+                        {% if thread.is_closed == False %}
+                        <div class="main-menu">
+                            <div class="button add" onclick="document.location.href='/thread/{{ thread.theme_id }}/post'"><img src="https://img.icons8.com/material-outlined/24/null/pencil--v2.png"/>Ответить в теме</div>
+                        </div>
+                        {% endif %}
+                        {% if (current_user.user_uuid == thread.author_uuid or current_user.role_id > 2) %}
+                            {% if thread.is_closed == False %}
+                                <div class="main-menu">
+                                    <form action="/thread/{{ thread.theme_id }}" method="post">
+                                        <input type="hidden" name="request_type" value="close">
+                                        <button class="button add" type="submit"><img src="https://cdn-icons-png.flaticon.com/24/2089/2089758.png"/>Закрыть тему</button>
+                                    </form>
+                                </div>
+                            {% endif %}
+                            <div class="main-menu">
+                                <form action="/thread/{{ thread.theme_id }}" method="post">
+                                    <input type="hidden" name="request_type" value="delete">
+                                    <button class="button add" type="submit"><img src="https://img.icons8.com/?size=24&id=45&format=png"/>Удалить тему</button>
+                                </form>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <div class="air-right"></div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-container">
+                <span class="footer-span-text1">
+                    Автор сайта: Зубов Николай Андреевич<br>
+                    Студент группы ИКБО-10-20<br>
+                    zubov.n.a@edu.mirea.ru
+                </span>
+                <span class="footer-span-text2">
+                    <a href="https://www.mirea.ru/">https://www.mirea.ru/</a><br>
+                    <address>РТУ МИРЭА. Москва, Проспект Вернадского, 78</address>
+                </span>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

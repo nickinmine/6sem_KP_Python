@@ -127,12 +127,37 @@ def register():
 
 @app.route("/user/<login>", methods=['GET'])
 def user_page(login=None):
-    user = User.query.filter_by(login=login).first()
+    user = User.query.filter_by(login=login).first_or_404()
     user_role = Role.query.filter_by(role_id=user.role_id).first()
     user.role_name = user_role.role_name
     user.thread_count = Thread.query.filter_by(author_uuid=user.user_uuid).count()
     user.post_count = Post.query.filter_by(author_uuid=user.user_uuid).count()
     return render_template('user_page.html', user=user)
+
+
+@app.route("/user/<login>", methods=['POST'])
+@login_required
+def user_settings(login=None):
+    user = User.query.filter_by(login=login).first_or_404()
+    admin = User.query.filter_by(user_uuid=session['active_user_uuid']).first()
+    if admin.role_id > 2:
+        if request.form['request_type'] == 'change_role':
+            role = request.form['role']
+            if role == "2":
+                user.role_id = 2
+                db.session.commit()
+            if role == "3":
+                user.role_id = 3
+                db.session.commit()
+            if role == "4":
+                user.role_id = 4
+                db.session.commit()
+            return redirect('/user/' + login)
+        if request.form['request_type'] == 'delete':
+            db.session.delete(user)
+            db.session.commit()
+            return redirect('/thread')
+    return redirect('/user/' + login)
 
 
 @app.route("/profile", methods=['GET'])
@@ -212,9 +237,40 @@ def thread_list():
     return render_template('threads.html', threads=threads)
 
 
-@app.route("/thread/<int:thread_id>", methods=['GET', 'PUT', 'DELETE'])
+@app.route("/thread/<int:thread_id>", methods=['GET'])
 def thread_id(thread_id=0):
-    return render_template('')
+    thread = Thread.query.filter_by(theme_id=thread_id).first_or_404()
+    author = User.query.filter_by(user_uuid=thread.author_uuid).first()
+    thread.author_login = author.login
+    thread.author_name = author.name
+    thread.open_date = str(thread.open_date)[0:-10]
+    if thread.close_date:
+        thread.close_date = str(thread.close_date)[0:-10]
+    posts = Post.query.filter_by(theme_id=thread_id).order_by(Post.post_date).all()
+    for post in posts:
+        user = User.query.filter_by(user_uuid=post.author_uuid).first()
+        post.author_login = user.login
+        post.author_name = user.name
+        post.post_date_short = str(post.post_date)[0:-10]
+    return render_template('post.html', thread=thread, posts=posts)
+
+
+@app.route("/thread/<int:thread_id>", methods=['POST'])
+@login_required
+def thread_settings(thread_id=0):
+    thread = Thread.query.filter_by(theme_id=thread_id).first_or_404()
+    if 'active_user_uuid' in session:
+        user = User.query.filter_by(user_uuid=session['active_user_uuid']).first()
+        if thread.author_uuid == session['active_user_uuid'] or user.role_id > 2:
+            if request.form['request_type'] == 'close':
+                thread.is_closed = True
+                db.session.commit()
+                return redirect('/thread/' + str(thread_id))
+            if request.form['request_type'] == 'delete':
+                db.session.delete(thread)
+                db.session.commit()
+                return redirect('/thread')
+    return redirect('/thread/' + str(thread_id))
 
 
 @app.route("/thread/add", methods=['GET', 'POST'])
@@ -228,6 +284,18 @@ def thread_add():
         db.session.commit()
         return redirect('/thread/' + str(thread.theme_id))
     return render_template('thread_add.html')
+
+
+@app.route("/thread/<int:thread_id>/post", methods=['GET', 'POST'])
+@login_required
+def post_add(thread_id=0):
+    if request.method == 'POST':
+        paragraph = request.form['paragraph']
+        post = Post(author_uuid=session['active_user_uuid'], theme_id=thread_id, paragraph=paragraph)
+        db.session.add(post)
+        db.session.commit()
+        return redirect('/thread/' + str(thread_id))
+    return render_template('post_add.html')
 
 
 #@login_manager.unauthorized_handler
