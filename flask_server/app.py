@@ -125,7 +125,20 @@ def register():
     return render_template('register.html')
 
 
-
+@app.route("/user", methods=['GET'])
+@login_required
+def user_list():
+    user = User.query.filter_by(user_uuid=session['active_user_uuid']).first()
+    if user.role_id > 2:
+        users = User.query.all()
+        for user in users:
+            user_role = Role.query.filter_by(role_id=user.role_id).first()
+            user.role_name = user_role.role_name
+            user.thread_count = Thread.query.filter_by(author_uuid=user.user_uuid).count()
+            user.post_count = Post.query.filter_by(author_uuid=user.user_uuid).count()
+        return render_template('user_list.html', users=users)
+    else:
+        return redirect('/')
 
 
 @app.route("/user/<login>", methods=['GET'])

@@ -1,0 +1,33 @@
+.profile {
+    width: 100%;
+}
+
+.userdata {
+    display: flex;
+    flex-direction: row;
+}
+
+.userdata > img {
+    margin-right: 20px;
+}
+
+.list {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.list:last-child {
+    margin-right: 0;
+}
+
+button {
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+}
+
+.list > p > a,
+.list > p > a:visited{
+    text-decoration: none;
+    color: #8F0EE5;
+    font-weight: bold;
+}
