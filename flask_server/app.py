@@ -1,26 +1,16 @@
 import hashlib
-import modulefinder
-import sys
 import uuid
-
-import flask
 from flask import Flask, render_template, redirect, request, session
 # from flask_cors import CORS
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import text
 from conf.config import Config, db
 from models.User import User
 from models.Thread import Thread
 from models.Role import Role
 from models.Post import Post
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
-#from sqlalchemy.orm import session, sessionmaker
 
-
-#db = SQLAlchemy()
 app = Flask(__name__)
 login_manager = LoginManager(app)
-#Session = sessionmaker()
 
 
 def create_app(config):
@@ -28,35 +18,13 @@ def create_app(config):
     app.config.from_object(config)
     db.init_app(app)
     login_manager.init_app(app)
-    # register_extensions(app)
     return app
-
-
-def get_sql_connect():
-    con = db.engine.connect()
-    return con
 
 
 @login_manager.user_loader
 def load_user(user_uuid):
-    #print('load_user', file=sys.stderr)
     user = User.query.filter_by(user_uuid=user_uuid).first()
-    #return User.get(user_uuid)
     return user
-
-
-@app.route("/test")
-@login_required
-def test():
-    # users = db.session.execute(db.select(User.user_uuid)).scalars()
-    con = get_sql_connect()
-    # users = con.execute(text('select version()'))
-    # users = db.session.query(User).all() #- теперь работает
-    # users = db.session.query(User).all()
-    users = User.query.all() #- не работает
-    #users = con.execute(text('select name, login, role_name from public."user" join role r on r.role_id = '
-    #                         '"user".role_id'))
-    return render_template('test.html', users=users)
 
 
 @app.route("/", methods=['GET'])
@@ -67,22 +35,6 @@ def indexpage():
 
 @app.route("/auth", methods=['GET', 'POST'])
 def auth():
-    # старая авторизация, возможно будет удалена
-    #if request.method == 'POST':
-    #    login = request.form['login']
-    #    password = request.form['password']
-    #    #print(login, password, file=sys.stderr)
-    #    if login and password:
-    #        con = get_sql_connect()
-    #        stmt = text("select user_uuid from public.user where login=:login and password=md5(:password) limit 1")
-    #        user = con.execute(stmt, {'login': login, 'password': password}).fetchone()
-    #        if user:
-    #            for row in user:
-    #                user_uuid = str(row)
-    #                session['active_user_uuid'] = user_uuid
-    #                userlogin = User().create(user_uuid)
-    #                login_user(userlogin)
-    #                return redirect("/profile")
     if request.method == 'POST':
         login = request.form['login']
         password = hashlib.md5(request.form['password'].encode())
@@ -114,9 +66,6 @@ def register():
         password2 = request.form['password2']
         if name and login and password:
             if password2 == password:
-                #con = get_sql_connect()
-                #stmt = text("insert into public.user (role_id, login, password, name) values (2, :login, md5(:password), :name)")
-                #con.execute(stmt, {'login': login, 'password': password, 'name': name})
                 password = hashlib.md5(password.encode())
                 user = User(user_uuid=uuid.uuid4(), role_id=2, login=login, password=password.hexdigest(), name=name)
                 db.session.add(user)
@@ -184,10 +133,6 @@ def profile():
         user = User.query.filter_by(user_uuid=user_uuid).first()
         user_role = Role.query.filter_by(role_id=user.role_id).first()
         user.role_name = user_role.role_name
-        #con = get_sql_connect()
-        #stmt = text('select name, login, role_name from public."user" join role r on r.role_id = '
-        #            '"user".role_id where user_uuid=:user_uuid')
-        #user = con.execute(stmt, {'user_uuid': user_uuid}).fetchone()
         return render_template('profile.html', user=user)
     return render_template('profile.html')
 
@@ -242,7 +187,6 @@ def thread_list():
     threads = Thread.query.order_by(Thread.open_date).all()
     if threads:
         for t in threads:
-            #user = User.query.get(t.author_uuid)
             user = User.query.filter_by(user_uuid=t.author_uuid).first()
             if user:
                 t.author_name = user.name
