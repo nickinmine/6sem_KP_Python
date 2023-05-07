@@ -316,6 +316,20 @@ def post_add(thread_id=0):
     return render_template('post_add.html')
 
 
+@app.route("/thread/<int:thread_id>/post/<int:post_id>", methods=['POST'])
+@login_required
+def post_delete(thread_id=0, post_id=0):
+    post = Post.query.filter_by(post_id=post_id).first_or_404()
+    if 'active_user_uuid' in session:
+        user = User.query.filter_by(user_uuid=session['active_user_uuid']).first()
+        if post.author_uuid == session['active_user_uuid'] or user.role_id > 2:
+            if request.form['request_type'] == 'delete':
+                db.session.delete(post)
+                db.session.commit()
+                return redirect('/thread/' + str(thread_id))
+    return redirect('/thread/' + str(thread_id))
+
+
 #@login_manager.unauthorized_handler
 #def unauthorized():
 #    return 'tekst', 401

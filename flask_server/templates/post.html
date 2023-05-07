@@ -65,6 +65,16 @@
                                         Дата публикации комментария: {{ post.post_date_short }}
                                     </p>
                                 {% endif %}
+                                {% if current_user.is_authenticated %}
+                                    {% if (current_user.user_uuid == post.author_uuid or current_user.role_id > 2) %}
+                                        <div class="main-menu">
+                                    <form action="/thread/{{ thread.theme_id }}/post/{{ post.post_id }}" method="post">
+                                        <input type="hidden" name="request_type" value="delete">
+                                        <button class="button add" type="submit"><img src="https://img.icons8.com/?size=24&id=45&format=png"/>Удалить сообщение</button>
+                                    </form>
+                                </div>
+                                    {% endif %}
+                                {% endif %}
                             </div>
                         </div>
                     {% endfor %}
