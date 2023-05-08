@@ -9,7 +9,7 @@ from models.Role import Role
 from models.Post import Post
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 login_manager = LoginManager(app)
 
 
@@ -274,14 +274,19 @@ def post_delete(thread_id=0, post_id=0):
     return redirect('/thread/' + str(thread_id))
 
 
-#@login_manager.unauthorized_handler
-#def unauthorized():
-#    return 'tekst', 401
+@login_manager.unauthorized_handler
+def unauthorized():
+    return redirect('/auth')
 
 
-#@app.errorhandler(404)
-#def page_not_found(error):
-#    return render_template('page_not_found.html'), 404
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('not_found.html', error=error), 404
+
+
+@app.errorhandler(405)
+def page_not_found(error):
+    return render_template('not_found.html', error=error), 405
 
 
 app = create_app(Config)

@@ -131,6 +131,11 @@ body {
     margin-top: 70px;
 }
 
+h1 {
+    margin-top: 100px;
+    text-align: center;
+}
+
 .main-menu {
     padding-bottom: 24px;
     display: flex;
@@ -205,8 +210,8 @@ p {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 60%;
-    height: auto;
+    width: 512px;
+    height: 512px;
 }
 
 .forms-collection {

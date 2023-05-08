@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="{{ url_for( 'static', filename='images/logo.svg')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for( 'static', filename='threads.css')}}">
+    <title>Страница не найдена</title>
+</head>
+<body>
+    <div class="page">
+        <header class="header">
+            <div class="header-container">
+                <div class="header-menu">
+                    <a href="/thread" class="header-logo" title="К списку форумов">К форумам</a>
+                </div>
+                <span class="header-span-text">Ошибка</span>
+                <a href="/auth" class="header-auth" title="Профиль">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="19" height="17">
+                        <path d="M184 83.5l164.5 164c4.7 4.7 4.7 12.3 0 17L184 428.5c-4.7
+                            4.7-12.3 4.7-17 0l-7.1-7.1c-4.7-4.7-4.7-12.3 0-17l132-131.4H12c-6.6
+                            0-12-5.4-12-12v-10c0-6.6 5.4-12 12-12h279.9L160 107.6c-4.7-4.7-4.7-12.3
+                            0-17l7.1-7.1c4.6-4.7 12.2-4.7 16.9 0zM512 400V112c0-26.5-21.5-48-48-48H332c-6.6
+                            0-12 5.4-12 12v8c0 6.6 5.4 12 12 12h132c8.8 0 16 7.2 16 16v288c0 8.8-7.2 16-16
+                            16H332c-6.6 0-12 5.4-12 12v8c0 6.6 5.4 12 12 12h132c26.5 0 48-21.5 48-48z">
+                        </path>
+                    </svg>Профиль</a>
+            </div>
+        </header>
+
+        <main class="main">
+            <h1>Уф!</h1>
+            <br>
+            <p style="margin-left: 10%">Кажется, Вы изобрели новую страницу.</p>
+            <p style="margin-left: 10%; margin-right: 10%">Описание ошибки: {{ error }}</p>
+            <br>
+            <img class="img404" width="256" height="256" src="https://www.shareicon.net/data/512x512/2015/10/25/661431_cat_512x512.png" alt=":(">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-container">
+                <span class="footer-span-text1">
+                    Автор сайта: Зубов Николай Андреевич<br>
+                    Студент группы ИКБО-10-20<br>
+                    zubov.n.a@edu.mirea.ru
+                </span>
+                <span class="footer-span-text2">
+                    <a href="https://www.mirea.ru/">https://www.mirea.ru/</a><br>
+                    <address>РТУ МИРЭА. Москва, Проспект Вернадского, 78</address>
+                </span>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
