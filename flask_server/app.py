@@ -1,20 +1,19 @@
 import hashlib
 import uuid
 from flask import Flask, render_template, redirect, request, session
-# from flask_cors import CORS
 from conf.config import Config, db
 from models.User import User
 from models.Thread import Thread
 from models.Role import Role
 from models.Post import Post
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
+from waitress import serve
 
 app = Flask(__name__, static_folder='static')
 login_manager = LoginManager(app)
 
 
 def create_app(config):
-    # CORS(app)
     app.config.from_object(config)
     db.init_app(app)
     login_manager.init_app(app)
@@ -290,4 +289,5 @@ def page_not_found(error):
 
 
 app = create_app(Config)
-app.run(host='0.0.0.0', port=80, debug=True, threaded=True)
+#app.run(host='0.0.0.0', port=80, threaded=True)
+serve(app, host='0.0.0.0', port=80)
