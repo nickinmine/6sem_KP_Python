@@ -17,7 +17,7 @@ CREATE FUNCTION public.thread_is_opened_checker() RETURNS trigger
 		res varchar;
 	BEGIN
 		IF (select is_closed from thread where theme_id = new.theme_id) then
-		raise exception 'Access denied. The theme is closed.';		
+		raise exception 'Access denied. The theme is closed.';
 		END IF;
 		return NEW;
 	END;
@@ -152,7 +152,7 @@ INSERT INTO public."user" VALUES ('4d5934c9-70f3-422f-94fb-9777b13e316d', 4, 'ro
 INSERT INTO public."user" VALUES ('d9ce0ae6-90b5-4a67-8cb1-57c96ce223b7', 2, 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 'Пользователь', 'https://www.shareicon.net/data/256x256/2016/05/24/770118_people_512x512.png');
 INSERT INTO public."user" VALUES ('17a7cfb4-40c1-404d-a00a-3668f8c8cd6b', 2, 'user2', '7e58d63b60197ceb55a1c487989a3720', 'Новенький', NULL);
 
-SELECT pg_catalog.setval('public.post_post_id_seq', 2, true);
+SELECT pg_catalog.setval('public.post_post_id_seq', 8, true);
 
 SELECT pg_catalog.setval('public.role_role_id_seq', 4, true);
 
